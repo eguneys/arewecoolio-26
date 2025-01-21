@@ -1,0 +1,79 @@
+.editor {
+
+    display: grid;
+    height: 100vh;
+
+    grid-template-areas: 
+    'colors canvas tools'
+    'colors timeline timeline';
+
+    grid-template-columns: 100px auto 100px;
+    grid-template-rows: 70% 30%;
+
+    .colors {
+        grid-area: colors;
+    }
+
+    .canvas-wrap {
+        grid-area: canvas;
+    }
+
+    .tools {
+        grid-area: tools;
+    }
+
+    .timeline {
+        grid-area: timeline;
+    }
+
+    $border-bg: rgb(81, 78, 78);
+
+    .timeline {
+        background: red;
+    }
+
+    .colors, .tools {
+        border: 1px solid $border-bg;
+    }
+
+    .colors {
+        display: flex;
+        flex-flow: row wrap;
+        .color {
+            user-select: none;
+            cursor: pointer;
+            flex: 1 1 50%;
+            aspect-ratio: 1;
+        }
+    }
+
+    .tools {
+        display: flex;
+        flex-flow: column;
+
+        .tool {
+            user-select: none;
+            cursor: pointer;
+            padding: 0.3em;
+            border-bottom: 1px solid $border-bg;
+        }
+    }
+
+    .canvas-wrap {
+        background: gray;
+
+        .canvas {
+            position: relative;
+            width: 100%;
+            height: 100%;
+
+
+            canvas {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+}
