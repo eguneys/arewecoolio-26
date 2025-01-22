@@ -1,6 +1,6 @@
 import { For, onMount } from "solid-js"
 import './Editor.scss'
-import { GL } from "./webgl"
+import { Canvas2D } from "./canvas2d/canvas2d"
 
 export default () => {
 
@@ -77,8 +77,7 @@ type XY = { x: number, y: number }
 
 export const PaintGround = (): PaintGround => {
 
-    let gl = GL(1920, 1080)
-
+    let gl = Canvas2D(1920, 1080)
     let canvas = gl.canvas
 
     let bounds: DOMRect
@@ -146,16 +145,13 @@ export const PaintGround = (): PaintGround => {
         }
 
 
+        let cc: XY[] = []
         if (cursor.length > 4) {
-            let cc = fit_spline(cursor, 8)
+            cc = fit_spline(cursor, 8)
 
-            cursor.shift()
-
-            for (let c of cc) {
-                //layer_stuff.circle(1, c.x, c.y, 8, 'blue')
-            }
         }
 
+        gl.lines(cc, 8)
         requestAnimationFrame(step)
     }
     requestAnimationFrame(step)
